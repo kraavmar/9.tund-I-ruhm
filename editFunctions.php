@@ -4,13 +4,13 @@
 	
 	function getSingleCarData($edit_id){
     
-        $database = "if16_romil";
+        $database = "if16_marikraav";
 
 		//echo "id on ".$edit_id;
 		
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 		
-		$stmt = $mysqli->prepare("SELECT plate, color FROM cars_and_colors WHERE id=?");
+		$stmt = $mysqli->prepare("SELECT plate, color FROM cars_and_colors WHERE id=? AND deleted IS NULL"); // AND asi juurde kui kustutamise lisad 
 
 		$stmt->bind_param("i", $edit_id);
 		$stmt->bind_result($plate, $color);
@@ -44,12 +44,12 @@
 
 	function updateCar($id, $plate, $color){
     	
-        $database = "if16_romil";
+        $database = "if16_marikraav";
 
 		
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 		
-		$stmt = $mysqli->prepare("UPDATE cars_and_colors SET plate=?, color=? WHERE id=?");
+		$stmt = $mysqli->prepare("UPDATE cars_and_colors SET plate=?, color=? WHERE id=? AND deleted IS NULL"); // AND asi juurde kui kustutamise lisad 
 		$stmt->bind_param("ssi",$plate, $color, $id);
 		
 		// kas õnnestus salvestada
@@ -62,6 +62,27 @@
 		$mysqli->close();
 		
 	}
+	
+	function deleteCar($id){
+    	
+        $database = "if16_romil";
+ 
+ 		
+ 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
+ 		
+ 		$stmt = $mysqli->prepare("UPDATE cars_and_colors SET deleted=NOW() WHERE id=? AND deleted IS NULL");
+ 		$stmt->bind_param("i",$id);
+ 		
+ 		// kas õnnestus salvestada
+ 		if($stmt->execute()){
+ 			// õnnestus
+ 			echo "salvestus õnnestus!";
+ 		}
+ 		
+ 		$stmt->close();
+ 		$mysqli->close();
+ 		
+ 	}
 	
 	
 ?>
