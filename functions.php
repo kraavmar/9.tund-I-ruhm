@@ -12,7 +12,13 @@
 	$User = new User($mysqli);
 	
 	require("Interest.class.php");
-	$User = new User($mysqli);
+	$Interest = new Interest($mysqli);
+	
+	require("Car.class.php");
+	$Car = new Car($mysqli);
+	
+	require("Helper.class.php");
+	$Helper = new Helper($mysqli);
 
 	
 	// see fail, peab olema kõigil lehtedel kus 

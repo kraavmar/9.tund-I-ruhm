@@ -1,4 +1,4 @@
-<?php class User {
+<?php class Interest {
 	
 	private $connection;
 	

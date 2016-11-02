@@ -6,7 +6,7 @@
 	if(isset($_GET["delete"]) && isset($_GET["id"])) {
  		// kustutan
  		
- 		deleteCar(cleanInput($_GET["id"]));
+ 		$Car->deleteCar($Helper->cleanInput($_GET["id"]));
  		header("Location: data.php");
  		exit();
  	}
@@ -14,7 +14,7 @@
 	//kas kasutaja uuendab andmeid
 	if(isset($_POST["update"])){
 		
-		updateCar(cleanInput($_POST["id"]), cleanInput($_POST["plate"]), cleanInput($_POST["color"]));
+		$Car->updateCar($Helper->cleanInput($_POST["id"]), $Helper->cleanInput($_POST["plate"]), $Helper->cleanInput($_POST["color"]));
 		
 		header("Location: edit.php?id=".$_POST["id"]."&success=true");
         exit();	
@@ -22,7 +22,7 @@
 	}
 	
 	//saadan kaasa id
-	$c = getSingleCarData($_GET["id"]);
+	$c = $Car->getSingleCarData($_GET["id"]);
 	var_dump($c);
 
 	

@@ -1,11 +1,11 @@
-<?php class User {
+<?php class Helper {
 	
-	private $connection;
+	/*private $connection;
 
 	function __construct($mysqli) {
 		
 		$this->connection = $mysqli;
-	}
+	}*/
 }
 
 	function cleanInput($input){
@@ -17,3 +17,4 @@
 		return $input;
 		
 	}
+?>
