@@ -6,9 +6,8 @@
 		
 		$this->connection = $mysqli;
 	}
-}
 
-	function saveCar ($plate, $color) {
+	function save ($plate, $color) {
 		
 
 		$stmt = $this->connection->prepare("INSERT INTO cars_and_colors (plate, color) VALUES (?, ?)");
@@ -28,7 +27,7 @@
 		
 	}
 	
-	function getAllCars() {
+	function getAll() {
 		
 		
 		$stmt =  $this->connection->prepare("
@@ -62,12 +61,12 @@
 		}
 		
 		$stmt->close();
-		$mysqli->close();
+		//$mysqli->close();
 		
 		return $result;
 	}
 	
-	function getSingleCarData($edit_id){
+	function getSingle($edit_id){
     
 
 		//echo "id on ".$edit_id;
@@ -102,9 +101,7 @@
 		return $car;
 	}
 	
-	function updateCar($id, $plate, $color){
-    	
-        $database = "if16_marikraav";
+	function update($id, $plate, $color){
 		
 		$stmt = $this->connection->prepare("UPDATE cars_and_colors SET plate=?, color=? WHERE id=? AND deleted IS NULL"); // AND asi juurde kui kustutamise lisad 
 		$stmt->bind_param("ssi",$plate, $color, $id);
@@ -120,7 +117,7 @@
 		
 	}
 	
-	function deleteCar($id){
+	function del($id){
  		
  		$stmt = $this->connection->prepare("UPDATE cars_and_colors SET deleted=NOW() WHERE id=? AND deleted IS NULL");
  		$stmt->bind_param("i",$id);
@@ -128,10 +125,11 @@
  		// kas õnnestus salvestada
  		if($stmt->execute()){
  			// õnnestus
- 			echo "salvestus õnnestus!";
+ 			echo "kustutamine õnnestus!";
  		}
  		
  		$stmt->close();
  		//$mysqli->close();
  		
  	}
+}

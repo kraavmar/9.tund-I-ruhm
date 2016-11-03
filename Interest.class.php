@@ -5,9 +5,8 @@
 	function __construct($mysqli) {
 		$this->connection = $mysqli;
 	}
-}
 
-	function saveInterest ($interest) {
+	function save($interest) {
 
 		$stmt = $this->connection->prepare("INSERT INTO interests (interest) VALUES (?)");
 	
@@ -26,7 +25,7 @@
 		
 	}
 	
-	function saveUserInterest ($interest_id) {
+	function saveUser($interest_id) {
 		
 		echo "huviala: ".$interest_id."<br>";
 		echo "kasutaja: ".$_SESSION["userId"]."<br>";
@@ -35,7 +34,7 @@
 		//kas on juba olemas
 		
 		$stmt = $this->connection->prepare("
-			SELECT id FROM user_interests_1 
+			SELECT id FROM user_interests
 			WHERE user_id=? AND interest_id=?
 		");
 		$stmt->bind_param("ii", $_SESSION["userId"], $interest_id);
@@ -53,7 +52,7 @@
 		// jätkan salvestamisega...
 		
 		$stmt = $this->connection->prepare("
-			INSERT INTO user_interests_1 
+			INSERT INTO user_interests 
 			(user_id, interest_id) VALUES (?, ?)
 		");
 	
@@ -72,7 +71,7 @@
 		
 	}
 		
-	function getAllInterests() {
+	function getAll() {
 		
 		$stmt = $this->connection->prepare("
 			SELECT id, interest
@@ -106,9 +105,9 @@
 		return $result;
 	}
 	
-	function getAllUserInterests() {
+	function getAllUser() {
 		
-		$stmt = $$this->connection->prepare("
+		$stmt = $this->connection->prepare("
 			SELECT interest
 			FROM interests
 			JOIN user_interests
@@ -143,4 +142,5 @@
 		
 		return $result;
 	}
+}
 ?>

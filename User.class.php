@@ -11,7 +11,6 @@
 		//$this viitab sellele klassile
 		$this->connection = $mysqli;
 	}
-}
 
 /*TEISED FUNKTSIOONID*/
 	
@@ -88,5 +87,6 @@
 		//$mysqli->close(); - kommenteeri välja, kuna muidu katkeb ühendus tervele klassile
 
 	}
+}
 
 ?>

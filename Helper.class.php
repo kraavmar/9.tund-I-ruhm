@@ -6,7 +6,6 @@
 		
 		$this->connection = $mysqli;
 	}*/
-}
 
 	function cleanInput($input){
 		
@@ -17,4 +16,5 @@
 		return $input;
 		
 	}
+}
 ?>

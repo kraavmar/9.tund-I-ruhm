@@ -29,17 +29,17 @@
 	
 	
 	if ( isset($_POST["plate"]) && 
-		isset($_POST["plate"]) && 
-		!empty($_POST["color"]) && 
+		isset($_POST["color"]) && 
+		!empty($_POST["plate"]) && 
 		!empty($_POST["color"])
 	  ) {
 		  
-		$Car->saveCar($Helper->cleanInput($_POST["plate"]), $Helper->cleanInput($_POST["color"]));
+		$Car->save($Helper->cleanInput($_POST["plate"]), $Helper->cleanInput($_POST["color"]));
 		
 	}
 	
 	//saan kõik auto andmed
-	$carData = $Car->getAllCars();
+	$carData = $Car->getAll();
 	//echo "<pre>";
 	//var_dump($carData);
 	//echo "</pre>";

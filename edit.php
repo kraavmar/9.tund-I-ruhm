@@ -6,7 +6,7 @@
 	if(isset($_GET["delete"]) && isset($_GET["id"])) {
  		// kustutan
  		
- 		$Car->deleteCar($Helper->cleanInput($_GET["id"]));
+ 		$Car->del($Helper->cleanInput($_GET["id"]));
  		header("Location: data.php");
  		exit();
  	}
@@ -14,7 +14,7 @@
 	//kas kasutaja uuendab andmeid
 	if(isset($_POST["update"])){
 		
-		$Car->updateCar($Helper->cleanInput($_POST["id"]), $Helper->cleanInput($_POST["plate"]), $Helper->cleanInput($_POST["color"]));
+		$Car->update($Helper->cleanInput($_POST["id"]), $Helper->cleanInput($_POST["plate"]), $Helper->cleanInput($_POST["color"]));
 		
 		header("Location: edit.php?id=".$_POST["id"]."&success=true");
         exit();	
@@ -22,10 +22,13 @@
 	}
 	
 	//saadan kaasa id
-	$c = $Car->getSingleCarData($_GET["id"]);
+	$c = $Car->getSingle($_GET["id"]);
 	var_dump($c);
 
 	
+	
+	//$_SERVER is an array containing information such as headers, paths, and script locations.
+	//For instance, $_SERVER['PHP_SELF'] in a script at the address http://example.com/foo/bar.php would be /foo/bar.php. 
 ?>
 <br><br>
 <a href="data.php"> tagasi </a>

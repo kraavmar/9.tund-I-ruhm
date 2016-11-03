@@ -104,7 +104,7 @@
 		//echo $serverUsername;
 		
 		// KASUTAN FUNKTSIOONI
-		$signupEmail = cleanInput($signupEmail);
+		$signupEmail = $Helper->cleanInput($signupEmail);
 		
 		$User->signUp($signupEmail, $Helper->cleanInput($password));
 		
