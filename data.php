@@ -39,7 +39,28 @@
 	}
 	
 	//saan kõik auto andmed
-	$carData = $Car->getAll();
+	//kas keegi otsib
+	if(isset($_GET["q"])){
+		//Kui otsib, võtame otsisõna aadressirealt
+		$q = $_GET["q"];
+		//otsisõna funktsiooni sisse
+		//$carData = $Car->getAll($q);  Ka nii toimib
+	} else {
+		//otsisõna tühi
+		$q = "";
+		//$carData = $Car->getAll($q);
+	}
+	
+	$sort = "id";
+	$order = "ASC";
+	
+	if(isset($_GET["sort"]) && isset($_GET["order"])) {
+		$sort = $_GET["sort"];
+		$order = $_GET["order"];
+	}
+	
+	//otsisõna funktsiooni sisse
+	$carData = $Car->getAll($q, $sort, $order);
 	//echo "<pre>";
 	//var_dump($carData);
 	//echo "</pre>";
@@ -69,14 +90,56 @@
 </form>
 
 <h2>Autod</h2>
+
+<form>
+	<input type="search" name="q" value="<?=$q;?>"> 
+	<input type="submit" value="Otsi">
+</form>
+
 <?php 
 	
 	$html = "<table>";
 	
 	$html .= "<tr>";
-		$html .= "<th>id</th>";
-		$html .= "<th>plate</th>";
-		$html .= "<th>color</th>";
+		$idOrder = "ASC"; //ascending
+		$plateOrder="ASC"; 
+		$colorOrder="ASC"; 
+		$idArrow = "&uarr;";
+		$plateArrow = "&uarr;";
+		$colorArrow = "&uarr;";
+		if (isset($_GET["sort"]) && $_GET["sort"] == "id") {
+			if (isset($_GET["order"]) && $_GET["order"] == "ASC") {
+				$idOrder="DESC"; //descending
+				$idArrow = "&darr;";
+			}
+		}
+		if (isset($_GET["sort"]) && $_GET["sort"] == "plate") {
+			if (isset($_GET["order"]) && $_GET["order"] == "ASC") {
+				$plateOrder="DESC"; 
+				$plateArrow = "&darr;";
+			}
+		}
+		if (isset($_GET["sort"]) && $_GET["sort"] == "color") {
+			if (isset($_GET["order"]) && $_GET["order"] == "ASC") {
+				$colorOrder="DESC";
+				$colorArrow = "&darr;";
+			}
+		}
+		$html .= "<th>
+				<a href='?q=".$q."&sort=id&order=".$idOrder."'>
+					id ".$idArrow."
+				</a>
+				</th>";
+		$html .= "<th>
+				<a href='?q=".$q."&sort=plate&order=".$plateOrder."'>
+					plate ".$plateArrow."
+				</a>	
+				</th>";
+		$html .= "<th>
+				<a href='?q=".$q."&sort=color&order=".$colorOrder."'>
+					color ".$colorArrow."
+				</a>
+				</th>";
 	$html .= "</tr>";
 	
 	//iga liikme kohta massiivis

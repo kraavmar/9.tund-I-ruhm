@@ -27,14 +27,45 @@
 		
 	}
 	
-	function getAll() {
+	function getAll($q, $sort, $order) {
+		$allowedSort = ["id", "plate", "color"];
 		
+		if(!in_array($sort, $allowedSort)) { //esimene asi, mis ta tahab, on nõel ja teine heinakuhi
+			// ei ole lubatud tulp, siis sorteerime id järgi
+			$sort = "id";
+		}
 		
-		$stmt =  $this->connection->prepare("
-			SELECT id, plate, color
-			FROM cars_and_colors
-			WHERE deleted IS NULL 
-		"); //WHERE asi juurde, kui kustutamise lisad
+		$orderBy = "ASC";
+		
+		//see if tagab, et orderby saab aint 2 väärtust olla
+		if($order == "DESC") {
+			$orderBy = "DESC";
+		}
+		
+		echo "Sorteerin ".$sort." ".$orderBy." ";
+		
+		//kas otsib
+		if($q != "") {
+			echo "Otsib: ".$q;
+			$stmt =  $this->connection->prepare("
+				SELECT id, plate, color
+				FROM cars_and_colors
+				WHERE deleted IS NULL 
+				AND (plate LIKE ? OR color LIKE ?)
+				ORDER BY $sort $order
+			"); //WHERE asi juurde, kui kustutamise lisad
+			$searchWord = "%".$q."%";
+			$stmt->bind_param("ss", $searchWord, $searchWord);
+			
+		} else {
+			$stmt =  $this->connection->prepare("
+				SELECT id, plate, color
+				FROM cars_and_colors
+				WHERE deleted IS NULL
+				ORDER BY $sort $order				
+			");
+		}
+		
 		echo  $this->connection->error;
 		
 		$stmt->bind_result($id, $plate, $color);
