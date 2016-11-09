@@ -111,25 +111,25 @@
 		$idOrder = "ASC"; //ascending
 		$plateOrder="ASC"; 
 		$colorOrder="ASC"; 
-		$idArrow = "&uarr;";
-		$plateArrow = "&uarr;";
-		$colorArrow = "&uarr;";
+		$idArrow = "&darr;";
+		$plateArrow = "&darr;";
+		$colorArrow = "&darr;";
 		if (isset($_GET["sort"]) && $_GET["sort"] == "id") {
 			if (isset($_GET["order"]) && $_GET["order"] == "ASC") {
 				$idOrder="DESC"; //descending
-				$idArrow = "&darr;";
+				$idArrow = "&uarr;";
 			}
 		}
 		if (isset($_GET["sort"]) && $_GET["sort"] == "plate") {
 			if (isset($_GET["order"]) && $_GET["order"] == "ASC") {
 				$plateOrder="DESC"; 
-				$plateArrow = "&darr;";
+				$plateArrow = "&uarr;";
 			}
 		}
 		if (isset($_GET["sort"]) && $_GET["sort"] == "color") {
 			if (isset($_GET["order"]) && $_GET["order"] == "ASC") {
 				$colorOrder="DESC";
-				$colorArrow = "&darr;";
+				$colorArrow = "&uarr;";
 			}
 		}
 		$html .= "<th>

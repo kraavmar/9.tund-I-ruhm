@@ -54,6 +54,7 @@
 				AND (plate LIKE ? OR color LIKE ?)
 				ORDER BY $sort $order
 			"); //WHERE asi juurde, kui kustutamise lisad
+			//AND ja ORDER BY juurde kui otsingu ja sorteerimise lisad
 			$searchWord = "%".$q."%";
 			$stmt->bind_param("ss", $searchWord, $searchWord);
 			

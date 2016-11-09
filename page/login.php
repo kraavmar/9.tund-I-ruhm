@@ -153,13 +153,20 @@
 					<input type="password" name="loginPassword" placeholder="Parool">
 					<br><br>
 					
-					<input class="btn btn-success btn-sm hidden-xs" type="submit " value="Logi sisse 1"><!-- Suurele ekraanile -->
-					<input class="btn btn-success btn-sm btn-block visible-xs-block" type="submit" value="Logi sisse 2"><!-- Väiksele ja mobiilile-->
+					<input class="btn btn-success btn-sm hidden-xs" type="submit" value="Logi sisse 1"> <!-- Suurele ekraanile -->
+					<input class="btn btn-success btn-sm btn-block visible-xs" type="submit" value="Logi sisse 2"><!-- Väiksele ja mobiilile-->
+					
+					<!-- 
+					 Suurele ekraanile 
+					<input class="btn btn-success btn-sm hidden-xs" type="submit " value="Logi sisse 1"> 
+					Väiksele ja mobiilile, visible-xs-block ei teinud hiirega klikkides midagi
+					<input class="btn btn-success btn-sm btn-block visible-xs-block" type="submit" value="Logi sisse 2"> 
+					-->
 				</form>
 			
 			</div>
 			
-			<div class="col-sm-4 col-sm-3  col-sm-offset-4 col-sm-offset-3">
+			<div class="col-sm-4 col-sm-3  col-sm-offset-4 col-sm-offset-3"><!-- offset- palju ruumi enne tulpa jääb -->
 			
 				<h1>Loo kasutaja</h1>
 				<form method="POST">
