@@ -1,6 +1,6 @@
 <?php
 
-	require("../../config.php");
+	require("/home/marikraav/config.php");
 	// functions.php
 	//var_dump($GLOBALS);
 	
@@ -8,17 +8,17 @@
 	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 	
 	//Iga klassiga tulevad need 2 rida juurde
-	require("User.class.php");
+	/*require("class/User.class.php");
 	$User = new User($mysqli);
 	
-	require("Interest.class.php");
+	require("class/Interest.class.php");
 	$Interest = new Interest($mysqli);
 	
-	require("Car.class.php");
+	require("class/Car.class.php");
 	$Car = new Car($mysqli);
 	
-	require("Helper.class.php");
-	$Helper = new Helper($mysqli);
+	require("class/Helper.class.php");
+	$Helper = new Helper($mysqli);*/
 
 	
 	// see fail, peab olema kõigil lehtedel kus 
